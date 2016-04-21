@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TubeStatusFetcher.UI.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="800" Width="800">
     <Grid>
         <ListView x:Name="statusListView" HorizontalAlignment="Left" Height="280" Margin="0,10,0,0" VerticalAlignment="Top" Width="507">
             <ListView.View>
@@ -30,6 +30,20 @@
                 <Button Content="Refresh" Click="Button_Click" />
             </StatusBarItem>
         </StatusBar>
+
+
+        <ListView x:Name="arrivalListView" Width="800" Margin="0,321,0,0" HorizontalAlignment="Left">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="StationName" Width="150" DisplayMemberBinding="{Binding ArrivalInfo.StationName}" />
+                    <GridViewColumn Header="PlatformName" Width="100" DisplayMemberBinding="{Binding ArrivalInfo.PlatformName}"/>
+                    <GridViewColumn Header="DestinationName" Width="Auto" DisplayMemberBinding="{Binding ArrivalInfo.DestinationName}" />
+                    <GridViewColumn Header="TimeToStationInMins" Width="Auto" DisplayMemberBinding="{Binding ArrivalInfo.TimeToStationInMins}" />
+                    <GridViewColumn Header="ExpectedArrival" Width="Auto" DisplayMemberBinding="{Binding ArrivalInfo.ExpectedArrival}" />
+                </GridView>
+            </ListView.View>
+         
+        </ListView>
 
     </Grid>
 </Window>

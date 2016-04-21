@@ -11,11 +11,18 @@ namespace TubeStatusFetcher.UI.WPF
     public class WpfLineInfoDecorator
     {
         public LineInfo LineInfo { get; set; }
+        public ArrivalInfo ArrivalInfo { get; set; }
 
         public WpfLineInfoDecorator(LineInfo lineInfo)
         {
             LineInfo = lineInfo;
         }
+
+        public WpfLineInfoDecorator(ArrivalInfo arrivalInfo)
+        {
+            ArrivalInfo = arrivalInfo;
+        }
+
 
         public Brush BackColour
         {

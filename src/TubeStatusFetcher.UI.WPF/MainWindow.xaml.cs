@@ -29,7 +29,16 @@ namespace TubeStatusFetcher.UI.WPF
 
             _fetcher = new Fetcher();
 
+            // TODO: Test new method written for getting new data
+            var arrivalInfos = _fetcher.GetArrivalInfo();
+
+            var newArrivalInfos = arrivalInfos.OrderBy(a => a.PlatformName)
+                                                .ThenBy(a => a.TimeToStationInMins)
+                                                .ToList();
+            //arrivalInfos.Sort((a1, a2) => a1.PlatformName.CompareTo(a2.PlatformName));
+
             DisplayStatus(_fetcher.GetTubeInfo());
+            DisplayStatus(newArrivalInfos);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -41,12 +50,28 @@ namespace TubeStatusFetcher.UI.WPF
         {
             retrievalTimeLabel.Content = $"Data retrieved at {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}";
 
-            statusListView.Items.Clear();
-           
+            statusListView.Items.Clear();           
+            
             foreach (var lineInfo in tubeStatus)
             {
                 statusListView.Items.Add(new WpfLineInfoDecorator(lineInfo));
+            }          
+
+        }
+
+
+        private void DisplayStatus(List<ArrivalInfo> tubeStatus)
+        {
+            retrievalTimeLabel.Content = $"Data retrieved at {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}";
+                       
+            arrivalListView.Items.Clear();
+
+            
+            foreach (var lineInfo in tubeStatus)
+            {
+                arrivalListView.Items.Add(new WpfLineInfoDecorator(lineInfo));
             }
+
         }
     }
 }
